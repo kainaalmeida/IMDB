@@ -3,11 +3,37 @@
     x:Class="IMDB.Views.TrendingPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:models="clr-namespace:IMDB.Models"
     xmlns:prism="http://prismlibrary.com"
     xmlns:viewModels="clr-namespace:IMDB.ViewModels"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     Title="Trending"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:DataType="viewModels:TrendingPageViewModel"
+    BackgroundColor="#cecece"
     IconImageSource="trending">
-    <CollectionView ItemsSource="{Binding Movies.results}" />
+    <CollectionView Margin="10" ItemsSource="{Binding Movies.results}">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout
+                HorizontalItemSpacing="10"
+                Orientation="Vertical"
+                Span="2"
+                VerticalItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <yummy:PancakeView
+                    x:DataType="models:Result"
+                    CornerRadius="10"
+                    IsClippedToBounds="True">
+                    <ffimageloading:CachedImage
+                        Aspect="AspectFill"
+                        DownsampleToViewSize="true"
+                        HeightRequest="300"
+                        Source="{Binding poster_image}" />
+                </yummy:PancakeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

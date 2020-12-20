@@ -27,7 +27,7 @@ namespace IMDB.Models
         public float vote_average { get; set; }
         public int vote_count { get; set; }
 
-        public string backgrop_image => $"{ApiHelper.BASE_URL}{backdrop_path}";
-        public string poster_image => $"{ApiHelper.BASE_URL}{poster_path}";
+        public string backgrop_image => $"{ApiHelper.BASE_IMAGE_URL}{backdrop_path}";
+        public string poster_image => $"{ApiHelper.BASE_IMAGE_URL}{poster_path}";
     }
 }
