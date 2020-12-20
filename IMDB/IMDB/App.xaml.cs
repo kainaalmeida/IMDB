@@ -37,12 +37,13 @@ namespace IMDB
             containerRegistry.RegisterForNavigation<TopPage, TopPageViewModel>();
             containerRegistry.RegisterForNavigation<ImdbTabbedPage, ImdbTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<UpcomingPage, UpcomingPageViewModel>();
+            containerRegistry.RegisterForNavigation<DetailMoviePage, DetailMoviePageViewModel>();
 
             //Services
             containerRegistry.Register<ITrendingRepository, TrendingRepository>();
             containerRegistry.Register<ITopRatingRepository, TopRatingRepository>();
             containerRegistry.Register<IIncomingRepository, IncomingRepository>();
-            containerRegistry.RegisterForNavigation<DetailMoviePage, DetailMoviePageViewModel>();
+            containerRegistry.Register<IDetailMovieRepository, DetailMovieRepository>();
         }
     }
 }
