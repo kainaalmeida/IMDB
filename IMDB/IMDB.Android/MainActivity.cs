@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using FFImageLoading.Forms.Platform;
 using Prism;
 using Prism.Ioc;
 
@@ -20,6 +21,10 @@ namespace IMDB.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+            CachedImageRenderer.InitImageViewHandler();
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 

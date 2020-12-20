@@ -1,4 +1,6 @@
-﻿namespace IMDB.Models
+﻿using IMDB.Helpers;
+
+namespace IMDB.Models
 {
     public class Movies
     {
@@ -24,5 +26,8 @@
         public bool video { get; set; }
         public float vote_average { get; set; }
         public int vote_count { get; set; }
+
+        public string backgrop_image => $"{ApiHelper.BASE_URL}{backdrop_path}";
+        public string poster_image => $"{ApiHelper.BASE_URL}{poster_path}";
     }
 }

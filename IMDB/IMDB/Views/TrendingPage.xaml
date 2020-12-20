@@ -4,6 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:viewModels="clr-namespace:IMDB.ViewModels"
     Title="Trending"
     prism:ViewModelLocator.AutowireViewModel="True"
-    IconImageSource="trending" />
+    x:DataType="viewModels:TrendingPageViewModel"
+    IconImageSource="trending">
+    <CollectionView ItemsSource="{Binding Movies.results}" />
+</ContentPage>
