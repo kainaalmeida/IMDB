@@ -36,6 +36,8 @@
                         Aspect="AspectFill"
                         DownsampleToViewSize="true"
                         HeightRequest="300"
+                        HorizontalOptions="Center"
+                        LoadingPlaceholder="Loading.png"
                         Source="{Binding poster_image, Mode=OneTime}" />
                 </yummy:PancakeView>
             </DataTemplate>

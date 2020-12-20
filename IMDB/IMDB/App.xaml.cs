@@ -2,6 +2,7 @@ using IMDB.Services.Contracts;
 using IMDB.Services.Implementation;
 using IMDB.ViewModels;
 using IMDB.Views;
+using MonkeyCache.LiteDB;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Essentials.Implementation;
@@ -20,6 +21,8 @@ namespace IMDB
         protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            Barrel.ApplicationId = "IMDb";
 
             await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(ImdbTabbedPage)}");
         }

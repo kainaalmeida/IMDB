@@ -201,6 +201,12 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.470</Version>
     </PackageReference>
+    <PackageReference Include="MonkeyCache">
+      <Version>1.5.0-beta</Version>
+    </PackageReference>
+    <PackageReference Include="MonkeyCache.LiteDB">
+      <Version>1.5.0-beta</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
     </PackageReference>
@@ -246,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\trending%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Loading.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
