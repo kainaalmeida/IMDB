@@ -12,10 +12,10 @@ namespace IMDB.ViewModels
     {
         protected INavigationService NavigationService { get; private set; }
 
-        private string _title;
 
         public event EventHandler IsActiveChanged;
 
+        private string _title;
         public string Title
         {
             get { return _title; }
@@ -28,6 +28,14 @@ namespace IMDB.ViewModels
             get { return _isActive; }
             set { SetProperty(ref _isActive, value, RaiseIsActiveChanged); }
         }
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+
 
         protected virtual void RaiseIsActiveChanged()
         {
