@@ -1,3 +1,5 @@
+using IMDB.Services.Contracts;
+using IMDB.Services.Implementation;
 using IMDB.ViewModels;
 using IMDB.Views;
 using Prism;
@@ -32,6 +34,9 @@ namespace IMDB
             containerRegistry.RegisterForNavigation<TopPage, TopPageViewModel>();
             containerRegistry.RegisterForNavigation<IncomingPage, IncomingPageViewModel>();
             containerRegistry.RegisterForNavigation<ImdbTabbedPage, ImdbTabbedPageViewModel>();
+
+            //Services
+            containerRegistry.Register<ITrendingRepository, TrendingRepository>();
         }
     }
 }

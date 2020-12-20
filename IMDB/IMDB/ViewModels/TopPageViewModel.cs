@@ -1,16 +1,17 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Prism.Navigation;
 
 namespace IMDB.ViewModels
 {
-    public class TopPageViewModel : BindableBase
+    public class TopPageViewModel : ViewModelBase
     {
-        public TopPageViewModel()
+        public TopPageViewModel(INavigationService navigationService) : base(navigationService)
         {
 
+        }
+
+        protected override void RaiseIsActiveChanged()
+        {
+            base.RaiseIsActiveChanged();
         }
     }
 }
