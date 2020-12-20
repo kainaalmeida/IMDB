@@ -3,6 +3,7 @@ using Flurl.Http;
 using IMDB.Extensions;
 using IMDB.Models;
 using IMDB.Services.Contracts;
+using IMDB.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -26,6 +27,12 @@ namespace IMDB.ViewModels
             set { SetProperty(ref _movie, value); }
         }
 
+        private Result _selectedItem;
+        public Result SelectedItem
+        {
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
+        }
 
         private int _itemTreshold;
         public int ItemTreshold
@@ -44,6 +51,10 @@ namespace IMDB.ViewModels
         private DelegateCommand _itemTresholdReachedCommand;
         public DelegateCommand ItemTresholdReachedCommand =>
             _itemTresholdReachedCommand ?? (_itemTresholdReachedCommand = new DelegateCommand(async () => await ExecuteItemTresholdReachedCommand()));
+
+        private DelegateCommand<Result> _selectedItemCommand;
+        public DelegateCommand<Result> SelectedItemCommand =>
+            _selectedItemCommand ?? (_selectedItemCommand = new DelegateCommand<Result>(async (movie) => await ExecuteSelectedItemCommand(movie)));
 
         public TrendingPageViewModel
             (
@@ -95,6 +106,31 @@ namespace IMDB.ViewModels
             }
         }
 
+        private async Task ExecuteSelectedItemCommand(Result movie)
+        {
+            if (IsBusy) return;
+
+            try
+            {
+                IsBusy = true;
+
+                if (movie is null) return;
+
+                var navParam = new NavigationParameters();
+                navParam.Add("Movie", movie);
+                await NavigationService.NavigateAsync($"{nameof(DetailMoviePage)}", parameters: navParam);
+
+            }
+            catch (Exception ex)
+            {
+                await _pageDialogService.Value.DisplayAlertAsync("IMDb", "Um erro aconteceu enquanto processava sua requisição", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         private async Task GetTrendingMoviesAsync()
         {
             try
@@ -125,6 +161,7 @@ namespace IMDB.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
             if (parameters.GetNavigationMode() != NavigationMode.Back)
             {
                 await GetTrendingMoviesAsync();

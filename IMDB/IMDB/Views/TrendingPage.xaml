@@ -17,7 +17,11 @@
         Margin="10"
         ItemsSource="{Binding ListMovies}"
         RemainingItemsThreshold="{Binding ItemTreshold}"
-        RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}">
+        RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}"
+        SelectedItem="{Binding SelectedItem}"
+        SelectionChangedCommand="{Binding SelectedItemCommand}"
+        SelectionChangedCommandParameter="{Binding SelectedItem}"
+        SelectionMode="Single">
         <CollectionView.ItemsLayout>
             <GridItemsLayout
                 HorizontalItemSpacing="10"

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="IMDB.Views.DetailMoviePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Movie.original_title}"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <StackLayout>
+        <Label Text="{Binding Movie.poster_image}" />
+    </StackLayout>
+</ContentPage>
