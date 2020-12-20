@@ -44,6 +44,7 @@ namespace IMDB
             containerRegistry.Register<ITopRatingRepository, TopRatingRepository>();
             containerRegistry.Register<IIncomingRepository, IncomingRepository>();
             containerRegistry.Register<IDetailMovieRepository, DetailMovieRepository>();
+            containerRegistry.RegisterForNavigation<WebviewPage, WebviewPageViewModel>();
         }
     }
 }

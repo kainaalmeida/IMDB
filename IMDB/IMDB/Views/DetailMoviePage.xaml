@@ -3,10 +3,100 @@
     x:Class="IMDB.Views.DetailMoviePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:models="clr-namespace:IMDB.Models"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:viewModels="clr-namespace:IMDB.ViewModels"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     Title="{Binding Movie.original_title}"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <StackLayout>
-        <Label Text="{Binding Movie.poster_image}" />
-    </StackLayout>
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="True">
+    <ScrollView>
+        <Grid
+            Padding="0"
+            x:DataType="viewModels:DetailMoviePageViewModel"
+            RowDefinitions="auto,auto,auto,auto,auto,auto"
+            RowSpacing="0">
+
+            <ffimageloading:CachedImage
+                Grid.Row="0"
+                Aspect="AspectFit"
+                DownsampleToViewSize="true"
+                ErrorPlaceholder="Error.png"
+                HeightRequest="220"
+                HorizontalOptions="FillAndExpand"
+                LoadingPlaceholder="Loading.png"
+                Source="{Binding Detail.backdrop_image, Mode=OneWay}" />
+
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="0"
+                VerticalOptions="Center">
+                <Image Source="star" />
+                <Label
+                    Text="{Binding Detail.vote_average}"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="2"
+                Margin="10,3"
+                BindableLayout.ItemsSource="{Binding Detail.genres}"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:Genre">
+                        <Label Text="{Binding name}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <Label
+                Grid.Row="3"
+                Margin="10,3"
+                Text="{Binding Detail.overview, Mode=OneWay}" />
+
+            <CollectionView
+                Grid.Row="4"
+                Margin="10,3"
+                HeightRequest="50"
+                ItemsSource="{Binding Detail.production_companies}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Horizontal"
+                        Span="1"
+                        VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Production_Companies">
+                        <ffimageloading:CachedImage
+                            Grid.Row="0"
+                            Aspect="AspectFit"
+                            DownsampleToViewSize="true"
+                            ErrorPlaceholder="Error.png"
+                            HeightRequest="60"
+                            HorizontalOptions="FillAndExpand"
+                            LoadingPlaceholder="Loading.png"
+                            RetryCount="3"
+                            RetryDelay="10"
+                            Source="{Binding logo_image, Mode=OneWay}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button
+                Grid.Row="5"
+                Margin="40,20,40,0"
+                BackgroundColor="#2196F3"
+                Command="{Binding HomePageCommand}"
+                CornerRadius="10"
+                Text="HOME"
+                TextColor="White" />
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

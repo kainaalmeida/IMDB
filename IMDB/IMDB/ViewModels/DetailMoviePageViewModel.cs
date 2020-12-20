@@ -2,6 +2,8 @@
 using Flurl.Http;
 using IMDB.Models;
 using IMDB.Services.Contracts;
+using IMDB.Views;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using System;
@@ -22,12 +24,16 @@ namespace IMDB.ViewModels
             set { SetProperty(ref _movie, value); }
         }
 
-        private MovieDetail _movieDetail;
-        public MovieDetail MovieDetail
+        private MovieDetail _detail;
+        public MovieDetail Detail
         {
-            get { return _movieDetail; }
-            set { SetProperty(ref _movieDetail, value); }
+            get { return _detail; }
+            set { SetProperty(ref _detail, value); }
         }
+
+        private DelegateCommand _homePageCommand;
+        public DelegateCommand HomePageCommand =>
+            _homePageCommand ?? (_homePageCommand = new DelegateCommand(async () => await ExecuteHomePageCommand()));
 
         public DetailMoviePageViewModel
             (
@@ -40,13 +46,33 @@ namespace IMDB.ViewModels
             _pageDialogService = pageDialogService;
         }
 
+        private async Task ExecuteHomePageCommand()
+        {
+            if (IsBusy) return;
+            try
+            {
+                IsBusy = true;
+                var navParam = new NavigationParameters();
+                navParam.Add("URL", Detail.homepage);
+                await NavigationService.NavigateAsync($"{nameof(WebviewPage)}", navParam);
+            }
+            catch (Exception ex)
+            {
+                await _pageDialogService.Value.DisplayAlertAsync("IMDb", "Um erro aconteceu enquanto processava sua requisição", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         private async Task GetMovieDetailAsync(int id)
         {
             try
             {
                 using (var Dialog = UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
                 {
-                    MovieDetail = await _detailMovieRepository.Value.GetMovieDetailAsync(id);
+                    Detail = await _detailMovieRepository.Value.GetMovieDetailAsync(id);
                 }
             }
             catch (FlurlHttpTimeoutException ex)

@@ -1,9 +1,12 @@
-﻿namespace IMDB.Models
+﻿using IMDB.Helpers;
+
+namespace IMDB.Models
 {
     public class MovieDetail
     {
         public bool adult { get; set; }
         public string backdrop_path { get; set; }
+        public string backdrop_image => $"{ApiHelper.BASE_IMAGE_URL}{backdrop_path}";
         public Belongs_To_Collection belongs_to_collection { get; set; }
         public int budget { get; set; }
         public Genre[] genres { get; set; }
@@ -15,6 +18,7 @@
         public string overview { get; set; }
         public float popularity { get; set; }
         public string poster_path { get; set; }
+        public string poster_image => $"{ApiHelper.BASE_IMAGE_URL}{poster_path}";
         public Production_Companies[] production_companies { get; set; }
         public Production_Countries[] production_countries { get; set; }
         public string release_date { get; set; }
@@ -35,6 +39,7 @@
         public string name { get; set; }
         public string poster_path { get; set; }
         public string backdrop_path { get; set; }
+        public string poster_image => $"{ApiHelper.BASE_IMAGE_URL}{poster_path}";
     }
 
     public class Genre
@@ -47,6 +52,7 @@
     {
         public int id { get; set; }
         public string logo_path { get; set; }
+        public string logo_image => $"{ApiHelper.BASE_IMAGE_URL}{logo_path}";
         public string name { get; set; }
         public string origin_country { get; set; }
     }
