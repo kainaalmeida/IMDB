@@ -14,8 +14,8 @@
     BarTextColor="White"
     NavigationPage.HasNavigationBar="False">
     <TabbedPage.Children>
-        <views:TrendingPage Title="Trending" />
+        <views:TrendingPage />
         <views:TopPage />
-        <views:IncomingPage />
+        <views:UpcomingPage />
     </TabbedPage.Children>
 </TabbedPage>

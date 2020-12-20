@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="IMDB.Views.TopPage"
+    x:Class="IMDB.Views.UpcomingPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -8,11 +8,11 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:viewModels="clr-namespace:IMDB.ViewModels"
     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    Title="Top Rating"
+    Title="Upcoming"
     prism:ViewModelLocator.AutowireViewModel="True"
-    x:DataType="viewModels:TopPageViewModel"
+    x:DataType="viewModels:UpcomingPageViewModel"
     BackgroundColor="#cecece"
-    IconImageSource="top">
+    IconImageSource="incoming">
     <CollectionView
         Margin="10"
         ItemsSource="{Binding ListMovies}"

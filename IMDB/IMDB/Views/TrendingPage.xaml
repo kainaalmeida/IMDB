@@ -35,10 +35,11 @@
                     <ffimageloading:CachedImage
                         Aspect="AspectFill"
                         DownsampleToViewSize="true"
+                        ErrorPlaceholder="Error.png"
                         HeightRequest="300"
                         HorizontalOptions="Center"
                         LoadingPlaceholder="Loading.png"
-                        Source="{Binding poster_image, Mode=OneTime}" />
+                        Source="{Binding poster_image, Mode=OneWay}" />
                 </yummy:PancakeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>

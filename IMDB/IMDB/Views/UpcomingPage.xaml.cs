@@ -2,9 +2,9 @@
 
 namespace IMDB.Views
 {
-    public partial class IncomingPage : ContentPage
+    public partial class UpcomingPage : ContentPage
     {
-        public IncomingPage()
+        public UpcomingPage()
         {
             InitializeComponent();
         }

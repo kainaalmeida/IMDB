@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace IMDB.ViewModels
 {
-    public class TopPageViewModel : ViewModelBase
+    public class UpcomingPageViewModel : ViewModelBase
     {
-        private readonly Lazy<ITopRatingRepository> _topRatingRepository;
+        private readonly Lazy<IIncomingRepository> _incomingRepository;
         private readonly Lazy<IPageDialogService> _pageDialogService;
 
         public ObservableCollection<Result> ListMovies { get; } = new ObservableCollection<Result>();
@@ -44,15 +44,15 @@ namespace IMDB.ViewModels
         private DelegateCommand _itemTresholdReachedCommand;
         public DelegateCommand ItemTresholdReachedCommand =>
             _itemTresholdReachedCommand ?? (_itemTresholdReachedCommand = new DelegateCommand(async () => await ExecuteItemTresholdReachedCommand()));
-        public TopPageViewModel
+
+        public UpcomingPageViewModel
             (
                 INavigationService navigationService,
-                Lazy<ITopRatingRepository> topRatingRepository,
+                Lazy<IIncomingRepository> incomingRepository,
                 Lazy<IPageDialogService> pageDialogService
-
             ) : base(navigationService)
         {
-            _topRatingRepository = topRatingRepository;
+            _incomingRepository = incomingRepository;
             _pageDialogService = pageDialogService;
             ItemTreshold = 1;
         }
@@ -66,7 +66,7 @@ namespace IMDB.ViewModels
                 using (var Dialog = UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
                 {
                     CurrentPage = Movie.page += 1;
-                    var result = await _topRatingRepository.Value.GetTopRatingMoviesAsync(CurrentPage);
+                    var result = await _incomingRepository.Value.GetIncomingMoviesAsync(CurrentPage);
 
                     if (result.results != null)
                     {
@@ -95,13 +95,13 @@ namespace IMDB.ViewModels
             }
         }
 
-        private async Task GetTopRatingMoviesAsync()
+        private async Task GetIncomingMoviesAsync()
         {
             try
             {
                 using (var Dialog = UserDialogs.Instance.Loading("Loading...", null, null, true, MaskType.Black))
                 {
-                    var result = await _topRatingRepository.Value.GetTopRatingMoviesAsync();
+                    var result = await _incomingRepository.Value.GetIncomingMoviesAsync();
                     if (result.results != null)
                     {
                         ListMovies?.Clear();
@@ -123,13 +123,12 @@ namespace IMDB.ViewModels
 
             }
         }
-
         protected override async void RaiseIsActiveChanged()
         {
             base.RaiseIsActiveChanged();
 
             if (IsActive)
-                await GetTopRatingMoviesAsync();
+                await GetIncomingMoviesAsync();
         }
     }
 }
