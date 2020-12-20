@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="IMDB.Views.ImdbTabbedPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:views="clr-namespace:IMDB.Views"
+    android:TabbedPage.BarItemColor="#66FFFFFF"
+    android:TabbedPage.BarSelectedItemColor="White"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BarBackgroundColor="#2196F3"
+    BarTextColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <TabbedPage.Children>
+        <views:TrendingPage Title="Trending" />
+        <views:TopPage />
+        <views:IncomingPage />
+    </TabbedPage.Children>
+</TabbedPage>
