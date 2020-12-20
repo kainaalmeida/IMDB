@@ -25,13 +25,14 @@
             <DataTemplate>
                 <yummy:PancakeView
                     x:DataType="models:Result"
+                    CompressedLayout.IsHeadless="True"
                     CornerRadius="10"
                     IsClippedToBounds="True">
                     <ffimageloading:CachedImage
                         Aspect="AspectFill"
                         DownsampleToViewSize="true"
                         HeightRequest="300"
-                        Source="{Binding poster_image}" />
+                        Source="{Binding poster_image, Mode=OneTime}" />
                 </yummy:PancakeView>
             </DataTemplate>
         </CollectionView.ItemTemplate>
