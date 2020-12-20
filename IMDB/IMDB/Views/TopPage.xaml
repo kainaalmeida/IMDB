@@ -3,7 +3,44 @@
     x:Class="IMDB.Views.TopPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:models="clr-namespace:IMDB.Models"
     xmlns:prism="http://prismlibrary.com"
+    xmlns:viewModels="clr-namespace:IMDB.ViewModels"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     Title="Top Rating"
     prism:ViewModelLocator.AutowireViewModel="True"
-    IconImageSource="top" />
+    x:DataType="viewModels:TopPageViewModel"
+    BackgroundColor="#cecece"
+    IconImageSource="top">
+    <CollectionView
+        Margin="10"
+        ItemsSource="{Binding ListMovies}"
+        RemainingItemsThreshold="{Binding ItemTreshold}"
+        RemainingItemsThresholdReachedCommand="{Binding ItemTresholdReachedCommand}">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout
+                HorizontalItemSpacing="10"
+                Orientation="Vertical"
+                Span="2"
+                VerticalItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <yummy:PancakeView
+                    x:DataType="models:Result"
+                    CompressedLayout.IsHeadless="True"
+                    CornerRadius="10"
+                    IsClippedToBounds="True">
+                    <ffimageloading:CachedImage
+                        Aspect="AspectFill"
+                        DownsampleToViewSize="true"
+                        HeightRequest="300"
+                        HorizontalOptions="Center"
+                        LoadingPlaceholder="Loading.png"
+                        Source="{Binding poster_image, Mode=OneTime}" />
+                </yummy:PancakeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

@@ -40,6 +40,7 @@ namespace IMDB
 
             //Services
             containerRegistry.Register<ITrendingRepository, TrendingRepository>();
+            containerRegistry.Register<ITopRatingRepository, TopRatingRepository>();
         }
     }
 }
