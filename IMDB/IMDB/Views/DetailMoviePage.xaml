@@ -81,7 +81,7 @@
                             HorizontalOptions="FillAndExpand"
                             LoadingPlaceholder="Loading.png"
                             RetryCount="3"
-                            RetryDelay="10"
+                            RetryDelay="350"
                             Source="{Binding logo_image, Mode=OneWay}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
